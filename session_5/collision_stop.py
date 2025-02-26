@@ -31,7 +31,7 @@ class LidarAvoidance(Node):
             twist_msg.angular.z = 0.0
 
             self.get_logger().info('Obstacle detected! Stopping.')
-            rclpy.get_global_executor().call_soon_threadsafe(self.show_collision_alert)
+            self.get_executor().call_soon(self.show_collision_alert)
             
         self.publisher.publish(twist_msg)
 
