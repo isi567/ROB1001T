@@ -5,6 +5,7 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
+import threading
 
 class LidarAvoidance(Node):
     def __init__(self):
@@ -14,6 +15,8 @@ class LidarAvoidance(Node):
         self.safe_distance = 0.5  # Stop if an obstacle is closer than 0.5 meters
         self.moving_forward = True
         self.timer = self.create_timer(0.1, self.move_robot)
+        self.root = tk.Tk()
+        self.root.withdraw()  # Hide the main Tkinter window
 
     def lidar_callback(self, msg):
         if not msg.ranges:
@@ -21,6 +24,12 @@ class LidarAvoidance(Node):
 
         closest_distance = min([r for r in msg.ranges if r > 0])
         self.moving_forward = closest_distance > self.safe_distance
+
+        if not self.moving_forward:
+            threading.Thread(target=self.show_warning).start()
+
+    def show_warning(self):
+        messagebox.showwarning("Warning", "Obstacle detected! Stopping.")
 
     def move_robot(self):
         twist_msg = Twist()
@@ -33,7 +42,6 @@ class LidarAvoidance(Node):
 
             self.get_logger().info('Obstacle detected! Stopping.')
 
-            
         self.publisher.publish(twist_msg)
 
 def main(args=None):
