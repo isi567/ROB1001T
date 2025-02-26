@@ -26,7 +26,7 @@ class LidarAvoidance(Node):
         self.moving_forward = closest_distance > self.safe_distance
 
         if not self.moving_forward:
-            threading.Thread(target=self.show_warning).start()
+            self.root.after(0, self.show_warning)
 
     def show_warning(self):
         messagebox.showwarning("Warning", "Obstacle detected! Stopping.")
@@ -47,7 +47,8 @@ class LidarAvoidance(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = LidarAvoidance()
-    rclpy.spin(node)
+    threading.Thread(target=rclpy.spin, args=(node,), daemon=True).start()
+    node.root.mainloop()
     node.destroy_node()
     rclpy.shutdown()
 
