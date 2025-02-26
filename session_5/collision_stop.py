@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+import tkinter as tk
+from tkinter import messagebox
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
@@ -29,8 +30,12 @@ class LidarAvoidance(Node):
         else:
             twist_msg.linear.x = 0.0  # Stop if an obstacle is too close
             twist_msg.angular.z = 0.0
+
             self.get_logger().info('Obstacle detected! Stopping.')
-        
+            root = tk.Tk()
+            root.withdraw()  # Hide the root window
+            messagebox.showinfo("Collision Alert", "Obstacle detected! Stopping the robot.")
+            
         self.publisher.publish(twist_msg)
 
 def main(args=None):
