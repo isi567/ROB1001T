@@ -32,10 +32,7 @@ class LidarAvoidance(Node):
             twist_msg.angular.z = 0.0
 
             self.get_logger().info('Obstacle detected! Stopping.')
-            root = tk.Tk()
-            root.withdraw()  # Hide the root window
-            messagebox.showinfo("Collision Alert", "Obstacle detected! Stopping the robot.")
-            root.destroy()
+
             
         self.publisher.publish(twist_msg)
 
