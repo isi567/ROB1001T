@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import tkinter as tk
 from tkinter import messagebox
 import rclpy
@@ -32,11 +31,15 @@ class LidarAvoidance(Node):
             twist_msg.angular.z = 0.0
 
             self.get_logger().info('Obstacle detected! Stopping.')
-            root = tk.Tk()
-            root.withdraw()  # Hide the root window
-            messagebox.showinfo("Collision Alert", "Obstacle detected! Stopping the robot.")
+            rclpy.get_global_executor().call_soon_threadsafe(self.show_collision_alert)
             
         self.publisher.publish(twist_msg)
+
+    def show_collision_alert(self):
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+        messagebox.showinfo("Collision Alert", "Obstacle detected! Stopping the robot.")
+        root.destroy()
 
 def main(args=None):
     rclpy.init(args=args)
