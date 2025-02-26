@@ -35,6 +35,7 @@ class LidarAvoidance(Node):
             root = tk.Tk()
             root.withdraw()  # Hide the root window
             messagebox.showinfo("Collision Alert", "Obstacle detected! Stopping the robot.")
+            root.destroy()
             
         self.publisher.publish(twist_msg)
 
