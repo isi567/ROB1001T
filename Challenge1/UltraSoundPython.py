@@ -16,7 +16,7 @@ class UltraSoundAvoidance(Node):
             self.subscription = self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
             self.safe_distance = 0.5  # Stop if an obstacle is closer than 0.5 meters
             self.moving_forward = True
-            self.timer = self.create_timer(0.1, self.move_robot)
+            self.timer = self.create_timer(0.1, self.my_move_robot)
     
     def lidar_callback(self, msg):
         if not msg.ranges:
