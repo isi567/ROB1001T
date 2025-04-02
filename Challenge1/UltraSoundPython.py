@@ -14,7 +14,7 @@ def read():
     data = arduino.readline()
     return data
 
-while ( True ):
+while ( True ):   
     value_byte = read()  # read bytes from the Arduino
     try:
         value_str = value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
@@ -23,12 +23,17 @@ while ( True ):
                 print("Arduino was Reset")
             else:
                 print(value_str) 
-                if value_str == "ultrasound":
-                    twist_msg.linear.x = 0.0  # Stop if an obstacle is too close
+                while value_str != "ultrasound":
+                    twist_msg.linear.x = 0.2  # Stop if an obstacle is too close
                     twist_msg.angular.z = 0.0
-                    self.get_logger().info('Obstacle detected! Stopping.')
-                    print("Stopping")
                     self.publisher.publish(twist_msg)
+
+                #if it does equal ultrasound
+                twist_msg.linear.x = 0.0  # Stop if an obstacle is too close
+                twist_msg.angular.z = 0.0
+                self.get_logger().info('Obstacle detected! Stopping.')
+                print("Stopping")
+                self.publisher.publish(twist_msg)
 
     except UnicodeDecodeError as e:
         print(f"Decoding error: {e}")
