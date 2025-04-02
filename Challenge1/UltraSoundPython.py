@@ -1,4 +1,4 @@
-# Importing Libraries
+f# Importing Libraries
 import serial
 import rclpy
 from rclpy.node import Node
@@ -46,23 +46,25 @@ class UltraSoundAvoidance(Node):
     def read():
         data = arduino.readline()
         return data
-    
-    while ( True ):   
-        value_byte = read()  # read bytes from the Arduino
-        try:
-            value_str = value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
-            if len(value_str) != 0:  # is there any message received?
-                if value_str.strip() == 'RS':  # strip whitespace/newlines
-                    print("Arduino was Reset")
-                else:
-                    print(value_str) 
-                    self.my_move_robot
-    
-        except UnicodeDecodeError as e:
-            print(f"Decoding error: {e}")
-    
-    arduino.close()
-
+        
+    def whileloop(self):
+        while ( True ):   
+            value_byte = read()  # read bytes from the Arduino
+            try:
+                value_str = value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
+                if len(value_str) != 0:  # is there any message received?
+                    if value_str.strip() == 'RS':  # strip whitespace/newlines
+                        print("Arduino was Reset")
+                    else:
+                        print(value_str) 
+                        self.my_move_robot
+        
+            except UnicodeDecodeError as e:
+                print(f"Decoding error: {e}")
+        
+        arduino.close()
+        
+self.whileloop()
 
 def main(args=None):
     rclpy.init(args=args)
