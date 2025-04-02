@@ -27,7 +27,7 @@ class UltraSoundAvoidance(Node):
 
     def my_move_robot(self):
         twist_msg = Twist()
-        while value_str != "ultrasound":
+        while whileloop.value_str != "ultrasound":
             twist_msg.linear.x = 0.2  # Stop if an obstacle is too close
             twist_msg.angular.z = 0.0
             self.publisher.publish(twist_msg)
