@@ -69,7 +69,7 @@ class UltraSoundAvoidance(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = UltraSoundAvoidance()
-    node.whileloop
+    node.whileloop()
     node.destroy_node()
     rclpy.shutdown()
 
