@@ -64,7 +64,7 @@ class UltraSoundAvoidance(Node):
         
         arduino.close()
         
-whileloop()
+UltraSoundAvoidance.whileloop()
 
 def main(args=None):
     rclpy.init(args=args)
