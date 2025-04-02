@@ -42,6 +42,7 @@ class UltraSoundAvoidance(Node):
                     print("Arduino was Reset")
                 else:
                     print(value_str) 
+                    twist_msg = Twist()
                     while value_str != "ultrasound":
                         twist_msg.linear.x = 0.2  # Stop if an obstacle is too close
                         twist_msg.angular.z = 0.0
