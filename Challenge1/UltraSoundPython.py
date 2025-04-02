@@ -56,7 +56,7 @@ class UltraSoundAvoidance(Node):
                     print("Arduino was Reset")
                 else:
                     print(value_str) 
-                    my_move_robot()
+                    self.my_move_robot
     
         except UnicodeDecodeError as e:
             print(f"Decoding error: {e}")
