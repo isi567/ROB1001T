@@ -1,7 +1,7 @@
 # Importing Libraries
 import serial
 # Change for your com port, e.g.: "COM8:", "/dev/ttyUSB0", etc.
-arduino = serial.Serial(port='/dev/ttyACM2', baudrate=115200, timeout=.1)
+arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
 
 def read():
     data = arduino.readline()
