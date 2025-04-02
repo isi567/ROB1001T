@@ -43,13 +43,13 @@ class UltraSoundAvoidance(Node):
             #self.root.after(0, self.show_warning)
     
     #################################################################################################################################
-    def read():
+    def Rread():
         data = arduino.readline()
         return data
         
     def whileloop(self):
         while ( True ):   
-            value_byte = self.read  # read bytes from the Arduino
+            value_byte = Rread()  # read bytes from the Arduino
             try:
                 value_str = value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
                 if len(value_str) != 0:  # is there any message received?
