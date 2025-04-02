@@ -1,7 +1,5 @@
 # Importing Libraries
 import serial
-import tkinter as tk
-from tkinter import messagebox
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
