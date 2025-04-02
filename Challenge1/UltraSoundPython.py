@@ -17,6 +17,7 @@ class UltraSoundAvoidance(Node):
             self.safe_distance = 0.5  # Stop if an obstacle is closer than 0.5 meters
             self.moving_forward = True
             self.timer = self.create_timer(0.1, self.my_move_robot)
+            value_str = ""
     
     def lidar_callback(self, msg):
         if not msg.ranges:
@@ -27,7 +28,7 @@ class UltraSoundAvoidance(Node):
 
     def my_move_robot(self):
         twist_msg = Twist()
-        while whileloop.value_str != "ultrasound":
+        while value_str != "ultrasound":
             twist_msg.linear.x = 0.2  # Stop if an obstacle is too close
             twist_msg.angular.z = 0.0
             self.publisher.publish(twist_msg)
