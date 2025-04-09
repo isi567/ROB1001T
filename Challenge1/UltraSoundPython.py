@@ -18,6 +18,7 @@ class UltraSoundAvoidance(Node):
             self.moving_forward = True
             self.timer = self.create_timer(0.1, self.my_move_robot)
             self.value_str = ""
+            self.value_byte = ""
     
     def lidar_callback(self, msg):
         if not msg.ranges:
@@ -50,7 +51,7 @@ class UltraSoundAvoidance(Node):
         
     def whileloop(self):
         while ( True ):   
-            value_byte = self.Rread()  # read bytes from the Arduino
+            self.value_byte = self.Rread()  # read bytes from the Arduino
             try:
                 self.value_str = self.value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
                 if len(self.value_str) != 0:  # is there any message received?
