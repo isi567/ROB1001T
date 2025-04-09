@@ -52,7 +52,7 @@ class UltraSoundAvoidance(Node):
         while ( True ):   
             value_byte = self.Rread()  # read bytes from the Arduino
             try:
-                value_str = value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
+                value_str = self.value_byte.decode("utf-8", errors="ignore")  # from byte to string, ignoring errors
                 if len(value_str) != 0:  # is there any message received?
                     if value_str.strip() == 'RS':  # strip whitespace/newlines
                         print("Arduino was Reset")
