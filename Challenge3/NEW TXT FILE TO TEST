@@ -1,1 +1,4 @@
 NEW TXT FILE TO TEST
+
+command for fake button topic:
+ros2 topic pub --once /button std_msgs/msg/Bool "{data: true}"
