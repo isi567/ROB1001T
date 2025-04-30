@@ -30,7 +30,7 @@ class LEDButton(Node):
                 if len(self.value_str) != 0:  # is there any message received?
                     if self.value_str.strip() == 'RS':  # strip whitespace/newlines
                         print("Arduino was Reset")
-                    else:
+                    elif self.value_str.strip() == 'on':
                         print(self.value_str) 
                         #publish to button topic
                         buttonStatus = Bool()
@@ -38,7 +38,13 @@ class LEDButton(Node):
                         self.publisher.publish(buttonStatus)
                         self.get_logger().info(f'Publishing: {buttonStatus.data}')
                         # Toggle the value for the next message
-                        buttonStatus.data = not buttonStatus.data
+                        #buttonStatus.data = not buttonStatus.data
+                    elif self.value_str.strip() == 'off':
+                        print(self.value_str) 
+                        #publish to button topic
+                        buttonStatus.data = False 
+                        self.publisher.publish(buttonStatus)
+                        self.get_logger().info(f'Publishing: {buttonStatus.data}')
         
             except UnicodeDecodeError as e:
                 print(f"Decoding error: {e}")
