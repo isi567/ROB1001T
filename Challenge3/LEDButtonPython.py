@@ -41,6 +41,7 @@ class LEDButton(Node):
                         #buttonStatus.data = not buttonStatus.data
                     elif self.value_str.strip() == 'off':
                         print(self.value_str) 
+                        buttonStatus = Bool()
                         #publish to button topic
                         buttonStatus.data = False 
                         self.publisher.publish(buttonStatus)
