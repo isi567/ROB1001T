@@ -43,7 +43,7 @@ class LEDButton(Node):
                         print(self.value_str) 
                         buttonStatus = Bool()
                         #publish to button topic
-                        buttonStatus.data = False 
+                        buttonStatus.data = True 
                         self.publisher.publish(buttonStatus)
                         self.get_logger().info(f'Publishing: {buttonStatus.data}')
         
