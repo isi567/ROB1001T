@@ -12,7 +12,7 @@ class LEDButton(Node):
     def __init__(self):
             super().__init__('LEDButton')
             self.publisher = self.create_publisher(Bool, '/button', 10)
-            self.subscription = self.create_subscription(Bool, '/moving', 10)
+            #self.subscription = self.create_subscription(Bool, '/moving', 10)
             #self.timer = self.create_timer(0.1, self.my_move_robot)
             self.value_str = ""
             self.value_byte = ""
